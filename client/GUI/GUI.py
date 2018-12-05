@@ -1,15 +1,18 @@
-from abc import ABCMeta, abctractmetod
+from abc import abstractmethod,ABC
 
 
-class GUI():
-	# def __init__(self, a):
-	# 	super(GUI, self).__init__()
-	# 	self.a = a
-	
-	@abctractmetod
+class GUI(ABC):
+	def __init__(self, client_socket):
+		super(GUI, self).__init__()
+		self.client_socket = client_socket
+
+	@abstractmethod
 	def send():
-	@abctractmetod
+		pass
+	@abstractmethod
 	def get():
-	@abctractmetod
+		pass
+	@abstractmethod
 	def run():
-	
+		pass	
+

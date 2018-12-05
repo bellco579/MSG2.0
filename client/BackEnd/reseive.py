@@ -1,20 +1,31 @@
-from GUI.Data_Entry import Data_Entry
+from .IO import Reseive_Data
 from socket import AF_INET, socket, SOCK_STREAM
+from threading import Thread
 
-class Reseive():
-	def __init__(self, client_cocket):
-		super(Reseive, self).__init__()
-		self.client_socket = client_cocket
-		# self.Data_Entry = Data_Entry
+class Send_MSG():
+	def __init__(self, GUI,client_socket):
+		super(Send_MSG, self).__init__()
+		self.GUI = GUI
+		self.client_socket = client_socket 
 	def run(self):
+		data = None
+		while True:
+			if (self.GUI.send_msg != None) and (self.GUI.send_msg != data):
+				self.client_socket.send(bytes(self.GUI.send_msg, "utf8"))
+				data = self.GUI.send_msg
+
+class Reseive(Reseive_Data):
+
+	def run(self):
+		SMSG = Send_MSG(self.GUI, self.client_socket)
+		Thread(target=SMSG.run).start()
 		while True:
 			try:
 				msg = self.client_socket.recv(1024)
-				
-				Data_Entry(msg)
+				self.GUI.msg = msg
 				print(msg)
-				# testmsg = "work"
-				# self.Data_Entry(testmsg)
-			except OSError:  # Possibly client has left the chat.
+				# self.GUI.get(msg)
+				# print(msg)
+			except OSError:
 				break
 

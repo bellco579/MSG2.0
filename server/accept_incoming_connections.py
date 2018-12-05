@@ -11,7 +11,8 @@ def accept_incoming_connections(SERVER,addresses):
             # print('connected to: ',client_address)
             msg = client.recv(1024)
             print(msg)
-            client.sendto(msg,client_address)
+            client.send(msg)
+            # client.sendto(msg,client_address)
 
         # print("%s:%s has connected." % client_address)
         # client.send(bytes("Greetings from the cave! Now type your name and press enter!", "utf8"))

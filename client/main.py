@@ -18,11 +18,14 @@ class Main():
 
 		client_socket = socket(AF_INET, SOCK_STREAM)
 		client_socket.connect((host, port))
-		client_socket.send(b'send')
-		RS = Reseive(client_socket)
+		print("connect to ", host)
+
+		GUI = Tkinter(client_socket)
+		gui_thread = Thread(target=GUI.run)
+		gui_thread.start()
+
+		RS = Reseive(GUI, client_socket)
 		receive_thread = Thread(target=RS.run)
 		receive_thread.start()
-		print("connect to ", host)
-		Tkinter(client_socket).run()
 
 Main().run()
