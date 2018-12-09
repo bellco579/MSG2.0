@@ -3,16 +3,16 @@ from threading import Thread
 from .GUI import GUI
 
 class Tkinter(GUI):
-	def __init__(self, client_socket):
+	def __init__(self,client_socket):
 		super(GUI, self).__init__()
 		self.msg = None
 		self.send_msg = None
-
+		self.client_socket = client_socket
 	def send(self,event=None):  
 	    self.send_msg = self.my_msg.get()
 	    self.my_msg.set("")  
 	    if self.send_msg == "{quit}":
-	        self.client_socket.close()
+	        # self.client_socket.close()
 	        self.top.quit()
 
 	def on_closing(self,event=None):
