@@ -1,12 +1,17 @@
+from abc import abstractmethod,ABC
 
-import json
 
-class main(object):
-	a = 1+2
+class interface(ABC):
 
-classT = main()
-print(classT)
-# dic = {"class":main}
-# with open('sample.json', 'w', encoding = "utf-8") as sam:
-# 	json.dump(dic, sam)
-# 	print('good')
+	@abstractmethod
+	def move(self):pass
+
+	def run():
+		implement()
+
+class implement(interface):
+
+	print('good')
+
+
+interface.run()
