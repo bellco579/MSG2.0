@@ -3,11 +3,12 @@ from threading import Thread
 from .GUI import GUI
 
 class Tkinter(GUI):
-	def __init__(self,client_socket):
+	def __init__(self,client_socket = None):
 		super(GUI, self).__init__()
 		self.msg = None
 		self.send_msg = None
 		self.client_socket = client_socket
+		
 	def send(self,event=None):  
 	    self.send_msg = self.my_msg.get()
 	    self.my_msg.set("")  

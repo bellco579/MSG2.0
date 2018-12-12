@@ -9,12 +9,6 @@ from .send import Send_Interface
 class Main():
 
 	def get_interface_of_implmets_object(self):
-		self.reseive = Reseive_Interface.choise_subclass()
-		self.send    = Send_Interface()
-		return {"reseive":self.reseive,"send":self.send}
-		# return self.reseive, self.send
-
-	def run(self):
 		print('connect is working')	
 
 		host = "192.168.1.64"
@@ -24,18 +18,23 @@ class Main():
 		client_socket = socket(AF_INET, SOCK_STREAM)
 		client_socket.connect((host, port))
 		print("connect to ", host)
+		self.reseive = Reseive_Interface.choise_subclass()
+		self.send    = Send_Interface.choice_subclass()
+
 		self.reseive.client_socket = client_socket
 		self.send.client_socket = client_socket 
+
+		return {"reseive":self.reseive,"send":self.send}
+		# return self.reseive, self.send
+
+	# def run(self):
 
 		# app_list = [GUI,]
 		# OUT_ctr = OUT_Controller(app_list)
 		# OUT_ctr_thread = Thread(target=OUT_ctr.run)
 		# OUT_ctr_thread.start()
 
-
-		receive_thread = Thread(target=self.reseive.run)
-		receive_thread.start()
-		send_thread = Thread(target=self.send.run)
-		send_thread.start()
+		# send_thread = Thread(target=self.send.run)
+		# send_thread.start()
 
 

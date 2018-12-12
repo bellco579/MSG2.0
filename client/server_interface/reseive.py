@@ -1,5 +1,8 @@
 from abc import abstractmethod,ABC
-from BL.in_controller import In_Controller
+from BL.in_controller import In_Controller_interface
+from threading import Thread
+
+
 class Reseive_Interface(ABC):
 	def __init__(self,client_socket = None):
 		super(Reseive_Interface, self).__init__()
@@ -14,22 +17,21 @@ class Reseive_Interface(ABC):
 
 
 
-
-
-
-
-# from .interfaces import Reseive_Data
-# from BL.in_controller import In_Controller as BL_in_controller
-
 class Reseive(Reseive_Interface):
-	def run(self):
+	def __init__(self):
+		self.in_controller = In_Controller_interface.choise_in_controller()
+		self.send_to_in_controller = self.in_controller
+		# print(type(self.send_to_in_controller))
+		# next(self.send_to_in_controller)
+
+	def reseive_data_from_server(self):
 		while True:
 			try:
-				for i in range(101):
-					if i == 100:
-						self.data = self.client_socket.recv(1024)
-				# BL_in.data = self.client_socket.recv(1024)
-				# self.GUI.msg = msg
-			except OSError:
-				break
+				self.data = self.client_socket.recv(1024)
+				print(type(self.send_to_in_controller))
+				self.send_to_in_controller.get(self.data)
+			except Exception:
+				pass
 
+	def run(self):
+		self.reseive_data_from_server()
