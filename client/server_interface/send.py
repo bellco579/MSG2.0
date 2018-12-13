@@ -18,5 +18,4 @@ class Send(Send_Data):
 	def run(self,data):
 		self.data = data
 		if self.data:
-			print(self.data)
 			self.client_socket.send(bytes(self.data, "utf8"))

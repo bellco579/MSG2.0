@@ -13,7 +13,6 @@ class Main(object):
 
 	def reseive(self,data):
 		self.data = data
-		print("BL:",self.data)
 		self.GUI.msg = self.data
 
 	def send_to_server(self):
@@ -30,18 +29,8 @@ class Main(object):
 	def run_reseive_in_server_interface(self):
 		Thread(target=self.IO_interface["reseive"].run).start()
 
-	# def send_to_GUI(self):
-	# 	while True:
-	# 		self.GUI.msg = self.data
-			# self.GUI.msg_list.insert(tkinter.END, self.data)
-		# self.data = (yield)
-		# print("BL:",self.data)
-		# in_controller = self.IO_interface['reseive'].in_controller
-		# print(in_controller)
-		# in_controller.run()
 
 	def run(self):
 		self.run_GUI()
 		self.run_reseive_in_server_interface()
 		Thread(target = self.send_to_server).start()
-		# In_controller = In_Controller_interface.choise_in_controller()
