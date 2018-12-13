@@ -8,11 +8,11 @@ class Main():
 	def run(self):
 		server_interface = serInt()
 		IO_interface = server_interface.get_interface_of_implmets_object()
-		server_interface.run()
+		# server_interface.run()
 		# Thread(target = server_interface.run,name = "server_interface").start()
-		# reseive = IO_interface["reseive"].in_controller
+		reseive = IO_interface["reseive"].in_controller
 		bl = BL()
-		# reseive.BL = bl
+		reseive.BL = bl
 		bl.IO_interface = IO_interface
 		bl.run()
 		# Bl = BL(IO_interface.data)
