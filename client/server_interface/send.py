@@ -1,6 +1,4 @@
 from .interfaces import Send_Data
-
-
 from abc import abstractmethod,ABC
 
 class Send_Interface(ABC):
@@ -10,7 +8,6 @@ class Send_Interface(ABC):
 		self.data = None
 	def choice_subclass():
 		return Send(1)
-
 
 
 
