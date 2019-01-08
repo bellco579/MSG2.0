@@ -16,13 +16,10 @@ class Handle_Client(Handle_Client_Interface):
         while True:
             try:
                 data = self.client.recv(1024)
+                if data:
+                    self.client.send(data)
             except Exception as e:
                 break
-            if data:
-                self.client.send(data)
-
-            print(data)
-
     def run(self):
         Thread(target = self.reseive).start()
 

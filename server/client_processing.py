@@ -3,6 +3,7 @@ from threading import Thread
 from abc import abstractmethod,ABC
 import json 
 from handle_client import Handle_Client_Interface as Handle_Client
+
 class Client_Pocessing_Interface(ABC):
     def __init__(self, Server):
         super(Client_Pocessing_Interface, self).__init__()
@@ -32,11 +33,13 @@ class Client_Processing(Client_Pocessing_Interface):
         while True:
             new_client = {}
             client, client_address = self.Server.accept()
+            print('new client:',client_address)
             new_client["id"] = self.id_generation()
             new_client["client_address"] = client_address
             self.client_list.append(new_client)
             self.dump_to_file()
             Handle_Client.run(client)
+            client.send(b'connected')
             # Thread(target = handle_client, args = (client,))
 
     def run(self):     
