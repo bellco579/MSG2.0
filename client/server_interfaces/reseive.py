@@ -1,4 +1,6 @@
 from abc import abstractmethod,ABC
+# from hammock import Hammock
+import slumber
 from .connect import Connect
 
 import asyncio
@@ -11,7 +13,18 @@ class Reseive(object):
 		self.client_coket = Connect().client_socket
 		self.cache = None
 	async def data_reseive(self):
+		api = slumber.API('http://localhost:8000/api/v1/',auth = ("bellco2", "antoha888"))
+		# print(api.)
+		# api = Hammock('localhost:8000/api/v1/')
+		# print(api.profile)
+		# print(api)
+		test = api.profile.get()
+		api.profile.send(test["id"] = 234)
+		print(type(test))
+		# api.profile.set(id =1 ,location = "efef")
+		# print(api.profile.send('dfdf'))
 		data = self.client_coket.recv(1024).decode()
+		print(data)
 		IN_controller(data)
 
 

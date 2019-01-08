@@ -14,7 +14,7 @@ class Connect(object):
 
 	def connection(self):
 		host = "localhost"
-		port = 5555
+		port = 8000
 		ADDR = (host, port)
 		self.client_socket = socket(AF_INET, SOCK_STREAM)
 		self.client_socket.connect((host, port))
